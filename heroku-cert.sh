@@ -43,7 +43,7 @@ then
   export CF_Zone_ID=$3
 
   # Generate wildcard certificate (this will take approx 130s)
-  ~/.acme.sh/acme.sh  --issue -d $1  -d "*.$1"  --dns dns_cf
+  ~/.acme.sh/acme.sh --debug --issue -d $1  -d "*.$1"  --dns dns_cf
 
   # Update the certificate in the live app
   heroku certs:update "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --confirm $2 --app $2
