@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+# NEEDS HEROKU CLI BUILDPACK INSTALLED
+# https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-cli
+
 # NEEDS THE FOLLOWING PARAMETER:
 # DOMAIN
 # HEROKU_APP
@@ -32,7 +35,6 @@ then
 
   # Map to environment variables that the ACME script requires
   
-  #export CF_Email=$CLOUDFLARE_EMAIL
   export CF_Token=$CLOUDFLARE_API_TOKEN
   
   # Get your Zone ID from the sidebar on the homepage of your Cloudflare Dashboard
