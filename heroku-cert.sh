@@ -8,7 +8,7 @@ set -e
 
 # NEEDS THE FOLLOWING VARS IN ENV:
 # CLOUDFLARE_EMAIL
-# CLOUDFLARE_API_KEY
+# CLOUDFLARE_API_TOKEN
 # HEROKU_API_KEY
 
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
@@ -35,8 +35,8 @@ then
   
   echo $CLOUDFLARE_EMAIL
   
-  export CF_Email=$CLOUDFLARE_EMAIL
-  export CF_Key=$CLOUDFLARE_API_KEY
+  #export CF_Email=$CLOUDFLARE_EMAIL
+  export CF_Token=$CLOUDFLARE_API_TOKEN
   
   # Get your Zone ID from the sidebar on the homepage of your Cloudflare Dashboard
   # Make sure you are using the 32 character alphanumeric ID that looks something like 81501ef88ef9b34f24450b63145d4019
