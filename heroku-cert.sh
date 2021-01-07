@@ -10,6 +10,9 @@ set -e
 # CLOUDFLARE_API_TOKEN
 # HEROKU_API_KEY
 
+heroku -v
+exit;
+
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
   -f | --force )
     force=1
