@@ -10,9 +10,19 @@ set -e
 # CLOUDFLARE_API_KEY
 # HEROKU_API_KEY
 
+while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
+  -f | --force )
+    force=1
+    ;;
+esac; shift; done
+if [[ "$1" == '--' ]]; then shift; fi
+
 # Only run once per week (Heroku scheduler runs daily)
-if [ "$(date +%u)" = 1 ]
+if [[ "$(date +%u)" = 1 || $force = 1 ]]
 then
+
+  echo "Running..."
+
   # Download dependencies
   git clone https://github.com/acmesh-official/acme.sh
   cd ./acme.sh
@@ -30,3 +40,5 @@ then
   # Update the certificate in the live app
   heroku certs:update "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --confirm $2 --app $2
 fi
+
+echo "Done"
