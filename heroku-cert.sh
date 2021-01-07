@@ -31,6 +31,9 @@ then
   ./acme.sh --install --force
 
   # Map to environment variables that the ACME script requires
+  
+  echo $CLOUDFLARE_EMAIL
+  
   export CF_Email=$CLOUDFLARE_EMAIL
   export CF_Key=$CLOUDFLARE_API_KEY
 
