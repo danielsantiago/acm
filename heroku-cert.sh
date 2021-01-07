@@ -39,8 +39,7 @@ then
   ~/.acme.sh/acme.sh --issue -d $1  -d "*.$1"  --dns dns_cf
 
   # Update the certificate in the live app
-  heroku certs:update "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --confirm $2 --app $2
-  heroku certs:add "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --confirm $2 --app $2
+  heroku certs:add "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --app $2
 fi
 
 echo "Done"
