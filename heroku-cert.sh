@@ -13,14 +13,14 @@ set -e
 # HEROKU_API_KEY
 
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
-  -f | --force )
-    force=1
+  -f | --first )
+    first=1
     ;;
 esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
 
 # Only run once per week (Heroku scheduler runs daily)
-if [[ "$(date +%u)" = 1 || $force = 1 ]]
+if [[ "$(date +%u)" = 1 || $first = 1 ]]
 then
 
   echo "Running..."
@@ -39,7 +39,12 @@ then
   ~/.acme.sh/acme.sh --issue -d $1  -d "*.$1"  --dns dns_cf
 
   # Update the certificate in the live app
-  heroku certs:add "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --app $2
+  if [[ $first = 1 ]]
+  then
+      heroku certs:add "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --app $2
+  else
+      heroku certs:update "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --app $2
+  fi
 fi
 
 echo "Done"
