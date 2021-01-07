@@ -12,7 +12,7 @@ set -e
 if [ "$(date +%u)" = 1 ]
 then
   # Download dependencies
-  git clone https://github.com/Neilpang/acme.sh.git
+  git clone https://github.com/acmesh-official/acme.sh
   cd ./acme.sh
 
   # Force ensures it doesnt fail because of lack of cron
