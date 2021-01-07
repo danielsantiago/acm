@@ -7,6 +7,7 @@ set -e
 # CF_Zone_ID
 
 # NEEDS THE FOLLOWING VARS IN ENV:
+# CLOUDFLARE_EMAIL
 # CLOUDFLARE_API_KEY
 # HEROKU_API_KEY
 
@@ -34,6 +35,7 @@ then
   
   echo $CLOUDFLARE_EMAIL
   
+  export CF_Email=$CLOUDFLARE_EMAIL
   export CF_Key=$CLOUDFLARE_API_KEY
   
   # Get your Zone ID from the sidebar on the homepage of your Cloudflare Dashboard
