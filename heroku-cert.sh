@@ -7,7 +7,6 @@ set -e
 # NEEDS THE FOLLOWING PARAMETER:
 # DOMAIN
 # HEROKU_APP
-# CF_Zone_ID
 
 # NEEDS THE FOLLOWING VARS IN ENV:
 # CLOUDFLARE_API_TOKEN
@@ -34,15 +33,10 @@ then
   ./acme.sh --install --force
 
   # Map to environment variables that the ACME script requires
-  
   export CF_Token=$CLOUDFLARE_API_TOKEN
   
-  # Get your Zone ID from the sidebar on the homepage of your Cloudflare Dashboard
-  # Make sure you are using the 32 character alphanumeric ID that looks something like 81501ef88ef9b34f24450b63145d4019
-  #export CF_Zone_ID=$3
-
   # Generate wildcard certificate (this will take approx 130s)
-  ~/.acme.sh/acme.sh --debug --issue -d $1  -d "*.$1"  --dns dns_cf
+  ~/.acme.sh/acme.sh --issue -d $1  -d "*.$1"  --dns dns_cf
 
   # Update the certificate in the live app
   heroku certs:update "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --confirm $2 --app $2
