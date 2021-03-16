@@ -38,6 +38,12 @@ then
   # Generate wildcard certificate (this will take approx 130s)
   ~/.acme.sh/acme.sh --issue -d $1  -d "*.$1"  --dns dns_cf
 
+  echo "fullchain.cer content:"
+  cat "/app/.acme.sh/$1/fullchain.cer"
+  
+  echo "$1.key content:"
+  cat "app/.acme.sh/$1/$1.key"
+
   # Update the certificate in the live app
   if [[ $first = 1 ]]
   then
