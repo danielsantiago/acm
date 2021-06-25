@@ -33,7 +33,7 @@ then
   cd ./acme.sh
 
   # Force ensures it doesnt fail because of lack of cron
-  ./acme.sh --install --force
+  ./acme.sh --install --force --set-default-ca --server letsencrypt
 
   # Map to environment variables that the ACME script requires
   export CF_Token=$CLOUDFLARE_API_TOKEN
