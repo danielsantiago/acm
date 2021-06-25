@@ -53,9 +53,9 @@ then
   # Update the certificate in the live app
   if [[ $first = 1 ]]
   then
-      heroku certs:add --domains="*.$1" "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --app $2
+      heroku certs:add --domains="*.$1" "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --app $2 --confirm $2
   else
-      heroku certs:update "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --app $2
+      heroku certs:update "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --app $2 --confirm $2
   fi
 fi
 
