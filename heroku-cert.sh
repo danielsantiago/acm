@@ -23,7 +23,7 @@ esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
 
 # Only run once per week (Heroku scheduler runs daily)
-if [[ "$(date +%u)" = 1 || $first = 1 || $force = 1 ]]
+if [[ "$(date +%u)" = 1 || $init = 1 || $force = 1 ]]
 then
 
   echo "Running..."
@@ -51,7 +51,7 @@ then
   cat "/app/.acme.sh/$1/$1.key"
 
   # Update the certificate in the live app
-  if [[ $first = 1 ]]
+  if [[ $init = 1 ]]
   then
       heroku certs:add --domains="*.$1" "/app/.acme.sh/$1/fullchain.cer" "/app/.acme.sh/$1/$1.key" --app $2 --confirm $2
   else
