@@ -13,14 +13,17 @@ set -e
 # HEROKU_API_KEY
 
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
-  -f | --first )
-    first=1
+  -i | --init )
+    init=1
+    ;;
+  -f | --force )
+    force=1
     ;;
 esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
 
 # Only run once per week (Heroku scheduler runs daily)
-if [[ "$(date +%u)" = 1 || $first = 1 ]]
+if [[ "$(date +%u)" = 1 || $first = 1 || $force = 1 ]]
 then
 
   echo "Running..."
