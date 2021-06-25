@@ -33,13 +33,13 @@ then
   cd ./acme.sh
 
   # Force ensures it doesnt fail because of lack of cron
-  ./acme.sh --install --force --set-default-ca --server letsencrypt
+  ./acme.sh --install --force
 
   # Map to environment variables that the ACME script requires
   export CF_Token=$CLOUDFLARE_API_TOKEN
   
   # Generate wildcard certificate (this will take approx 130s)
-  ~/.acme.sh/acme.sh --issue -d $1  -d "*.$1"  --dns dns_cf
+  ~/.acme.sh/acme.sh --issue -d $1  -d "*.$1"  --dns dns_cf --set-default-ca --server letsencrypt
 
   echo "fullchain.cer content:"
   cat "/app/.acme.sh/$1/fullchain.cer"
